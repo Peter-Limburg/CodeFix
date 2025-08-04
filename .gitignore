@@ -1,0 +1,152 @@
+# CodeFix - AI-Powered Bug Analysis .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+codefix-env/
+codefix_env/
+
+# Environment Variables & Config
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+config.py
+secrets.json
+api_keys.txt
+
+# FastAPI & Uvicorn
+.uvicorn/
+uvicorn.log
+*.log
+logs/
+
+# Streamlit
+.streamlit/
+streamlit_cache/
+
+# Database files (if you add SQLite later)
+*.db
+*.sqlite
+*.sqlite3
+database.db
+
+# AI/ML Models & Data
+models/
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+data/
+datasets/
+embeddings/
+vectors/
+
+# Jupyter Notebooks (if you add any)
+.ipynb_checkpoints
+*.ipynb
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+
+# Documentation builds
+docs/_build/
+.readthedocs.yml
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Cache directories
+.cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Package managers
+.pip/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Future expansion files (when you upgrade to real RAG)
+chromadb/
+faiss_index/
+vector_store/
+scraped_data/
+github_issues/
+
+# Docker (for future deployment)
+.dockerignore
+
+# Cloud deployment files (future)
+.gcloud/
+.aws/
+.azure/
+
+# User uploaded files (if you add file upload feature)
+uploads/
+user_files/
+
+# Backup files
+*.bak
+*.backup
+*.old
