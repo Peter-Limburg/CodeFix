@@ -1,0 +1,169 @@
+{
+  "bug_examples": [
+    {
+      "id": 1,
+      "title": "React useEffect causing infinite re-renders and crashing app",
+      "description": "My React component keeps crashing with 'Maximum call stack size exceeded' error. The useEffect hook seems to be running infinitely and I can't figure out why. The component renders once but then immediately starts looping.",
+      "tech_stack": "React",
+      "error_message": "Uncaught RangeError: Maximum call stack size exceeded at App (App.js:8) at renderWithHooks (react-dom.development.js:16305)",
+      "code_snippet": "useEffect(() => {\n  setData([1, 2, 3]);\n}); // Missing dependency array",
+      "complexity": "beginner",
+      "category": "frontend_logic_error",
+      "tags": ["react", "hooks", "useEffect", "infinite-loop", "javascript"]
+    },
+    {
+      "id": 2,
+      "title": "Node.js server won't start - port already in use error",
+      "description": "I'm trying to start my Express server but it keeps failing with EADDRINUSE error. Sometimes it works after restarting my computer but that can't be the solution. Other times the port seems free but I still get this error.",
+      "tech_stack": "Node.js",
+      "error_message": "Error: listen EADDRINUSE: address already in use :::3001 at Server.setupListenHandle [as _listen2] (node:net:1330:16)",
+      "code_snippet": "app.listen(PORT, () => {\n  console.log(`Server running on port ${PORT}`);\n});",
+      "complexity": "beginner",
+      "category": "backend_configuration",
+      "tags": ["nodejs", "express", "port", "EADDRINUSE", "server"]
+    },
+    {
+      "id": 3,
+      "title": "Async/await making API calls too slow - performance issue",
+      "description": "My function takes over 3 seconds to fetch user data from 3 different endpoints. Each API call works fine individually and takes about 300ms, but together they're taking way too long. No errors are thrown but users are complaining about slow load times.",
+      "tech_stack": "JavaScript",
+      "error_message": null,
+      "code_snippet": "const userProfile = await fetch(`/api/users/${userId}/profile`);\nconst userPreferences = await fetch(`/api/users/${userId}/preferences`);\nconst userPosts = await fetch(`/api/users/${userId}/posts`);",
+      "complexity": "intermediate",
+      "category": "performance_issue",
+      "tags": [
+        "javascript",
+        "async-await",
+        "performance",
+        "api",
+        "parallel-execution"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Django CSRF verification failed on form submission",
+      "description": "My Django login form keeps returning 'CSRF verification failed' error when users try to submit. The form works sometimes in development but fails in production. AJAX requests to the same endpoint also fail with 403 Forbidden.",
+      "tech_stack": "Django",
+      "error_message": "Forbidden (403) CSRF verification failed. Request aborted. Reason given for failure: CSRF token missing or incorrect.",
+      "code_snippet": "<form method=\"post\" action=\"/submit/\">\n  <input type=\"text\" name=\"username\">\n  <input type=\"password\" name=\"password\">\n  <input type=\"submit\" value=\"Login\">\n</form>",
+      "complexity": "beginner",
+      "category": "web_security",
+      "tags": ["django", "csrf", "forms", "security", "403-error"]
+    },
+    {
+      "id": 5,
+      "title": "Pandas KeyError when accessing DataFrame columns",
+      "description": "I'm getting KeyError when trying to access columns in my pandas DataFrame. The column names look correct when I print the DataFrame, but accessing them by name throws an error. This happens with data loaded from a CSV file.",
+      "tech_stack": "Python",
+      "error_message": "KeyError: 'Age' at analysis.py line 15 print(df['Age'])",
+      "code_snippet": "df = pd.read_csv('data.csv')\nprint(df['Age'])  # KeyError\nprint(df.columns)  # Shows: ['name', 'age', 'city']",
+      "complexity": "beginner",
+      "category": "data_science_error",
+      "tags": ["pandas", "dataframe", "keyerror", "csv", "python"]
+    },
+    {
+      "id": 6,
+      "title": "Python circular import error between modules",
+      "description": "I'm getting 'ImportError: cannot import name from partially initialized module' when trying to run my Python application. My user_service and order_service modules need to use each other's classes but importing causes this circular dependency error.",
+      "tech_stack": "Python",
+      "error_message": "ImportError: cannot import name 'UserService' from partially initialized module 'user_service' (circular import)",
+      "code_snippet": "# user_service.py\nfrom order_service import OrderService\nclass UserService:\n    def __init__(self):\n        self.order_service = OrderService()",
+      "complexity": "intermediate",
+      "category": "architecture_issue",
+      "tags": [
+        "python",
+        "circular-import",
+        "modules",
+        "architecture",
+        "imports"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Java NullPointerException when processing user input",
+      "description": "My Java application crashes with NullPointerException when users submit forms with empty fields. The error occurs when I try to call string methods like length() or toUpperCase() on what I thought were valid String objects.",
+      "tech_stack": "Java",
+      "error_message": "Exception in thread \"main\" java.lang.NullPointerException at com.example.StringProcessor.processName(StringProcessor.java:8)",
+      "code_snippet": "public void processName(String name) {\n    System.out.println(\"Name length: \" + name.length());\n    System.out.println(\"Uppercase: \" + name.toUpperCase());\n}",
+      "complexity": "beginner",
+      "category": "runtime_error",
+      "tags": [
+        "java",
+        "nullpointerexception",
+        "string",
+        "validation",
+        "null-check"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Spring Boot showing Whitelabel Error Page instead of my pages",
+      "description": "My Spring Boot web application shows a generic 'Whitelabel Error Page' instead of loading my actual pages. Sometimes I get 404 errors for URLs that should work, and my custom error pages never appear. The application starts without errors but page navigation is broken.",
+      "tech_stack": "Spring Boot",
+      "error_message": "Whitelabel Error Page - This application has no explicit mapping for /error, so you are seeing this as a fallback. There was an unexpected error (type=Not Found, status=404).",
+      "code_snippet": "@GetMapping(\"/users\")\npublic String getUserDashboard() {\n    return \"WEB-INF/pages/dashboard\"; // Incorrect path\n}",
+      "complexity": "intermediate",
+      "category": "framework_configuration",
+      "tags": ["spring-boot", "whitelabel-error", "mvc", "mapping", "404-error"]
+    },
+    {
+      "id": 9,
+      "title": "Database foreign key constraint violation on insert",
+      "description": "I'm getting foreign key constraint errors when trying to save new records to my database. The error happens when I try to create a Book record with an author_id that should exist. This works in my test database but fails in production.",
+      "tech_stack": "SQL Database",
+      "error_message": "FOREIGN KEY constraint failed: insert or update on table violates foreign key constraint",
+      "code_snippet": "book = Book.objects.create(\n    title=\"Some Book\",\n    author_id=999  # This author ID doesn't exist\n)",
+      "complexity": "intermediate",
+      "category": "database_integrity",
+      "tags": ["database", "foreign-key", "constraint", "sql", "integrity"]
+    },
+    {
+      "id": 10,
+      "title": "Database queries are very slow - N+1 query problem",
+      "description": "My web page takes 5+ seconds to load a list of authors and their books. The database has good performance in other areas, but this specific query pattern seems to be generating hundreds of individual SQL queries instead of joining the data efficiently.",
+      "tech_stack": "Python",
+      "error_message": null,
+      "code_snippet": "authors = Author.objects.all()\nfor author in authors:\n    books = author.books.all()\n    print(f\"{author.name}: {len(books)} books\")",
+      "complexity": "intermediate",
+      "category": "performance_issue",
+      "tags": [
+        "database",
+        "orm",
+        "n-plus-one",
+        "performance",
+        "sql-optimization"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "total_examples": 10,
+    "complexity_levels": {
+      "beginner": 4,
+      "intermediate": 6
+    },
+    "tech_stacks": [
+      "React",
+      "Node.js",
+      "JavaScript",
+      "Django",
+      "Python",
+      "Java",
+      "Spring Boot",
+      "SQL Database"
+    ],
+    "categories": [
+      "frontend_logic_error",
+      "backend_configuration",
+      "performance_issue",
+      "web_security",
+      "data_science_error",
+      "architecture_issue",
+      "runtime_error",
+      "framework_configuration",
+      "database_integrity"
+    ],
+    "created": "2025-01-08",
+    "description": "Curated collection of realistic bug examples for CodeFix API training and testing"
+  }
+}
