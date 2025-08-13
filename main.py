@@ -33,9 +33,8 @@ from typing import Dict, Any
 # Import our custom data models (these define the structure of our API requests/responses)
 from models import BugReport, BugSolution
 
-# TODO: Import these after initial MVP is working
-# from mock_rag import find_bug_solution  # Will handle bug solution matching
-# from prompts import generate_solution_prompt  # Will generate AI prompts
+# Import AI engine for bug analysis
+from ai_engine import BugSolutionAI
 
 # =============================================================================
 # APPLICATION CONFIGURATION
@@ -75,6 +74,15 @@ app_start_time = time.time()    # When the app started (for uptime calculation)
 request_count = 0               # Total number of requests received
 error_count = 0                 # Total number of errors encountered
 analyze_bug_count = 0           # Number of bug analysis requests specifically
+
+# =============================================================================
+# AI ENGINE INITIALIZATION
+# =============================================================================
+
+# Initialize the AI engine (this will load the model and examples)
+print("🚀 Initializing CodeFix AI Engine...")
+ai_engine = BugSolutionAI()
+print("✅ AI Engine initialized successfully!")
 
 # =============================================================================
 # ROOT ENDPOINT
@@ -135,7 +143,7 @@ async def health_check():
     - Global variables track simple metrics across requests
     - Exception handling prevents the health check itself from breaking
     """
-    global request_count
+    global request_count, error_count
     request_count += 1
     
     try:
@@ -179,7 +187,6 @@ async def health_check():
         
     except Exception as e:
         # If the health check itself fails, that's a serious problem
-        global error_count
         error_count += 1
         raise HTTPException(status_code=500, detail=f"Health check failed: {str(e)}")
 
@@ -294,45 +301,25 @@ async def analyze_bug(bug_report: BugReport):
         print(f"[{datetime.now()}] Analyzing bug: {bug_report.title[:50]}...")
         
         # =================================================================
-        # TODO: IMPLEMENT ACTUAL BUG ANALYSIS LOGIC HERE
+        # AI-POWERED BUG ANALYSIS
         # =================================================================
-        # This is where you'll integrate your mock_rag and prompts modules:
-        #
-        # 1. Use mock_rag.find_bug_solution(bug_report) to search for similar bugs
-        # 2. If no exact match, use prompts.generate_solution_prompt() to create AI prompts
-        # 3. Process the response and return a properly formatted BugSolution
-        #
-        # For now, we return a placeholder to test the endpoint structure
+        # Use the AI engine to find the best matching solution
         
-        # Placeholder solution (replace this with actual implementation)
-        placeholder_solution = BugSolution(
-            title="Placeholder Solution",
-            solution=f"This is a placeholder solution for: {bug_report.title}. "
-                    f"The actual solution matching will be implemented in mock_rag.py. "
-                    f"Your bug involves {bug_report.tech_stack} technology.",
-            code_example="// Placeholder code example\n"
-                        "const fix = () => {\n"
-                        "  // Your solution implementation will go here\n"
-                        "  console.log('Bug fixed!');\n"
-                        "};",
-            source="CodeFix Knowledge Base",
-            confidence=0.85,  # Confidence score between 0.0 and 1.0
-            tags=["placeholder", bug_report.tech_stack]
-        )
+        # Find solution using semantic similarity search
+        solution = ai_engine.find_solution(bug_report)
         
-        # TODO: Replace the placeholder with actual solution finding:
-        # solution = find_bug_solution(bug_report)
-        # if not solution:
-        #     raise HTTPException(
-        #         status_code=404, 
-        #         detail="No matching solution found for this bug type"
-        #     )
+        if not solution:
+            # No confident match found
+            raise HTTPException(
+                status_code=404, 
+                detail="No confident solution found for this bug type. Try providing more details about the issue."
+            )
         
         # Calculate and log processing time
         processing_time = round(time.time() - start_time, 3)
-        print(f"[{datetime.now()}] Solution found in {processing_time}s with confidence: {placeholder_solution.confidence}")
+        print(f"[{datetime.now()}] Solution found in {processing_time}s with confidence: {solution.confidence}")
         
-        return placeholder_solution
+        return solution
         
     except ValidationError as e:
         # Pydantic validation failed - the request data is malformed

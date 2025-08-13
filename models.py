@@ -3,7 +3,7 @@ models.py - Pydantic models for CodeFix MVP
 
 This file defines the BugReport model, which represents a single bug report submitteed by a user.
 """
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field
 from datetime import datetime
 
@@ -85,4 +85,57 @@ class BugReport(BaseModel):
     )
 
     class Config:
-        orm_mode = True  # Allows compatibility with ORMs 
+        orm_mode = True  # Allows compatibility with ORMs
+
+
+class BugSolution(BaseModel):
+    """
+    BugSolution defines the structure of a solution returned by the CodeFix AI.
+    
+    This represents the AI's analysis and suggested fix for a bug report.
+    """
+    
+    title: str = Field(
+        ...,
+        example="Fix React State Mutation",
+        description="Short title describing the solution"
+    )
+    
+    solution: str = Field(
+        ...,
+        example="React doesn't detect direct state mutations. You need to create a new array or object to trigger re-renders.",
+        description="Detailed explanation of the solution"
+    )
+    
+    code_example: str = Field(
+        ...,
+        example="// ❌ Direct mutation\ntodos.push(item);\nsetTodos(todos);\n\n// ✅ New array\nsetTodos([...todos, item]);",
+        description="Code examples showing wrong vs right approach"
+    )
+    
+    source: str = Field(
+        ...,
+        example="React Documentation - State Updates",
+        description="Source of the solution (documentation, best practices, etc.)"
+    )
+    
+    confidence: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        example=0.89,
+        description="AI confidence score (0.0 to 1.0)"
+    )
+    
+    tags: List[str] = Field(
+        default=[],
+        example=["react", "state", "mutation", "hooks"],
+        description="Tags for categorizing the solution"
+    )
+    
+    similarity_score: Optional[float] = Field(
+        default=None,
+        ge=0.0,
+        le=1.0,
+        description="Raw similarity score from AI engine"
+    ) 
