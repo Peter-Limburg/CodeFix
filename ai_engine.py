@@ -81,7 +81,8 @@ class BugSolutionAI:
         """Load the sentence transformer model."""
         try:
             print("Loading sentence transformer model...")
-            self.model = SentenceTransformer('all-MiniLM-L6-v2')
+            # Use a much smaller model for Render's free tier memory limits
+            self.model = SentenceTransformer('paraphrase-MiniLM-L3-v2')
             self.model_loaded = True
             print("✅ Model loaded successfully")
         except Exception as e:
