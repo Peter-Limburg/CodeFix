@@ -19,6 +19,16 @@ AI Approach vs Traditional:
 
 # Interactive docs at http://localhost:8000/docs
 
+## 🚀 Live Demo
+
+**Try it live:** [Your Render URL will go here]
+
+**Local Development:**
+
+```bash
+python main.py
+```
+
 3. Test the AI
    bashcurl -X POST "http://localhost:8000/analyze-bug" \
    -H "Content-Type: application/json" \

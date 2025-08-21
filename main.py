@@ -403,6 +403,6 @@ if __name__ == "__main__":
         "main:app",           # Module and app instance to run
         host="0.0.0.0",       # Listen on all network interfaces
         port=8000,            # Port to listen on
-        reload=True,          # Auto-reload on code changes (REMOVE IN PRODUCTION!)
+        reload=False,         # Auto-reload on code changes (DISABLED IN PRODUCTION!)
         log_level="info"      # Logging level
     )
